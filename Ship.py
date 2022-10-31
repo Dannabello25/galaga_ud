@@ -7,7 +7,7 @@ class Ship:
         self.hits = 0
         self.x_pos = 0
         self.y_pos = 0
-        self.length = 10
+        self.length = 32
         self.direction = "RIGHT"
         self.status = "ALIVE"
         
@@ -20,6 +20,7 @@ class Ship:
             self.x_pos += 1
         elif self.direction == "LEFT":
             self.x_pos -= 1
+        
     
     def hit(self):
         self.hits += 1
@@ -28,12 +29,12 @@ class Ship:
         self.status = "DEAD"
         
     def fire(self):
-        self.bullets.append(Bullet(self.x_pos, self.y_pos))
+        self.bullets.append(Bullet(self.x_pos+self.length/2, self.y_pos))
                 
         #Check if the bullet is out of the screen
         for bullet in self.bullets:
-            if bullet.y < 0:
-                self.bullets.remove(bullet)
+            if bullet.y <= 0:
+                bullet.direction ="DOWN"
 
 
     
